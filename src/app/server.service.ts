@@ -8,7 +8,9 @@ export class ServerService {
 
     storeServers(servers: any[]) {
         const headers = new HttpHeaders({'Context-Type': 'application/json'});
-        return this.http.post('https://udemy-138f8.firebaseio.com/data.json', servers,
+        // return this.http.post('https://udemy-138f8.firebaseio.com/data.json', servers,
+        //     {headers: headers});
+        return this.http.put('https://udemy-138f8.firebaseio.com/data.json', servers,
             {headers: headers});
     }
 
