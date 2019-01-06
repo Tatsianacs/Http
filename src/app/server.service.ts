@@ -23,15 +23,18 @@
 //             .pipe(map(data => { return data}));
 //     }
 // }
-import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
 import 'rxjs/Rx';
+import {Observable} from "rxjs";
 
 // import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ServerService {
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
+
     storeServers(servers: any[]) {
         const headers = new Headers({'Content-Type': 'application/json'});
         // return this.http.post('https://udemy-138f8.firebaseio.com/data.json',
@@ -43,13 +46,20 @@ export class ServerService {
     }
 
     getServers() {
-        return this.http.get('https://udemy-138f8.firebaseio.com/data.json')
+        return this.http.get('https://udemy-138f8.firebaseio.com/data')
             .map((response: Response) => {
-                const data = response.json();
-                for(const server of data) {
-                    server.name = 'FETCHED_' + server.name;
+                    const data = response.json();
+                    for (const server of data) {
+                        server.name = 'FETCHED_' + server.name;
+                    }
+                    return data;
                 }
-                return data;
-            });
+            )
+            .catch((error: Response) => {
+                    console.log(error);
+                    return Observable.throw('wrong');
+                }
+            )
+            ;
     }
 }
