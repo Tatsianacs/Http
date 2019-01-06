@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class ServerService {
@@ -7,6 +7,12 @@ export class ServerService {
     }
 
     storeServers(servers: any[]) {
-        return this.http.post('https://udemy-138f8.firebaseio.com/data.json', servers);
+        const headers = new HttpHeaders({'Context-Type': 'application/json'});
+        return this.http.post('https://udemy-138f8.firebaseio.com/data.json', servers,
+            {headers: headers});
+    }
+
+    getServers() {
+        return this.http.get('https://udemy-138f8.firebaseio.com/data.json');
     }
 }

@@ -40,4 +40,15 @@ export class AppComponent {
   private generateId() {
     return Math.round(Math.random() * 10000);
   }
+
+  onGet() {
+      this.serverService.getServers()
+          .subscribe(
+              (data) => {
+                  console.log(data);
+              },
+              (error) => console.log(error)
+          );
+  }
+
 }
