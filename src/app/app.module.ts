@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ServerService} from "./server.service";
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import {ServerService} from "./server.service";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpModule
   ],
   providers: [ServerService],
   bootstrap: [AppComponent]
